@@ -28,7 +28,7 @@ $( document ).ready(function() {
   });//$(".arrow_left")
    
   $(".arrow_right").click(function(){
-    alert('Item selected');
+    
     if(prevItem > 0){
 
       $(`#${--nextItem}`).hide( "slow");
