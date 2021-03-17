@@ -50,10 +50,12 @@ $( document ).ready(function() {
       // 'ajaxurl' не определена во фронте, поэтому мы добавили её аналог с помощью wp_localize_script()
       $.post( myajax.url, data, function(response) {
         let posts = parseJSON(response);
-        if(posts){
-          $(`#${activCategory}-cat`).removeClass("activ");
+        $(`#${activCategory}-cat`).removeClass("activ");
           $(`#${event.currentTarget.id}`).addClass("activ");
           activCategory = parseInt(event.currentTarget.id);
+
+        if(posts){
+          
           $( "div" ).remove( ".singl_card_wrapper" );
           $("h2").remove(".catalog_title_empty");
           countItems = posts.length;
@@ -111,6 +113,7 @@ $( document ).ready(function() {
           
         }//if
         else{
+          $("h2").remove(".catalog_title_empty");
           $( "div" ).remove( ".singl_card_wrapper" );
           $(`.arrows`).after(`<h2 class="catalog_title_empty"> В этой категории ничего нет!</h2>`);
         }
