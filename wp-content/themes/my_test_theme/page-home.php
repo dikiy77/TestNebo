@@ -75,7 +75,7 @@ get_header();
                         <?php
                         global $post; // не обязательно
 
-                        // 5 записей из рубрики 9
+                        // 
                         $myposts = get_posts( array(
                             'category' => 1,
                             'nopaging' => 1,
@@ -93,7 +93,7 @@ get_header();
                         ?>
                         <div id="<?php echo $card_id++; ?>" class="singl_card_wrapper">
                             <div class="card">
-                                <img src="<?php echo MY_THEM_IMG; ?>/svg/card_img.svg" alt="card_img"class="card_img"></img>
+                                <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="card_img"class="card_img"></img>
                                 <div class="card_title">"<?php echo $post->post_title; ?>"</div>
                                 <p class="card_discription"><?php echo $post->post_excerpt; ?></p>
                                 <div class="card_price">
@@ -112,7 +112,7 @@ get_header();
                                 </button>
                             </div>
                             <div class="card_hover">
-                                <img src="<?php echo MY_THEM_IMG; ?>/svg/card_img.svg" alt="card_img"class="card_img"></img>
+                                <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="card_img"class="card_img"></img>
                                 <div class="hover_img">
                                     
                                 </div>

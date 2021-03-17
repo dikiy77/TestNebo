@@ -354,8 +354,21 @@ body{
     margin-right: -50%;
     transform: translate(-17%, 0);
 }
+.catalog_title_empty{
+    position: relative;
+    z-index: 2;
+    font-weight: 900;
+    font-size: 22px;
+    line-height: 26px;
+    letter-spacing: 0.05em;
+    color: #3B484A;
+    margin-left: 40%;
+    margin-right: -50%;
+    margin-top: 50px;
+}
 
 .tab_wrapper{
+    position: relative;
     max-width: 1267px;
     margin: 0 auto;
     padding-top: 74px; 
@@ -370,6 +383,8 @@ body{
 }
 
 .tab_item{
+    position: relative;
+    z-index: 3;
     display: flex;
     justify-content: space-between;
     width: fit-content;
@@ -377,6 +392,7 @@ body{
     border-radius: 25px;
     background-color: white;
     margin-bottom: 10px;
+    cursor: pointer;
     
 }
 
@@ -463,8 +479,8 @@ body{
 }
 
 .card_img{
-    width: 170px;
-    height: 170px;
+    max-width: 170px;
+    max-height: 170px;
     padding-top: 27px;
     margin: 0 auto;
 }
@@ -632,8 +648,8 @@ body{
 
 /*======= Foter styles start ============*/
 .footer{
-    width: 1366px;
-    height: 180px;
+    max-width: 1366px;
+    min-height: 180px;
     background-color:#FFFFFF;
     position: relative;
     z-index: 10;
@@ -644,6 +660,7 @@ body{
 .footer_wrapper{
     padding-top: 74px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     color: black;
 }
