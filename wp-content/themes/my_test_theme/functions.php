@@ -20,6 +20,7 @@ function theme_myTestThem_scripts() {
 	wp_enqueue_script( 'script-myTestThem', MY_THEM_JS . '/script.js', array(), '1.0.5', true );
 
 }
+ // декларирую myajax для запросов с фронта
 add_action( 'wp_enqueue_scripts', 'myajax_data', 99 );
 function myajax_data(){
 
@@ -34,7 +35,8 @@ function myajax_data(){
 }
 
 /*
- * Удаление метабокса
+ * Удаление метабокса 
+ * У моего метабокса нет id по этому он не скрывается
  */
 /*function udalenie_metaboksa_metok() {
 	$id = 'tagsdiv-post_tag'; // у каждого метабокса есть свой ID, который можно глянуть в исходном коде страницы
@@ -104,33 +106,34 @@ if( defined('DOING_AJAX') ){
 	
 }
 
-
+// обработчик запроса на товары из категории
 function get_category_callback(){
-
+	// проверяем, что запрос с нашего сайта
 	if( ! wp_verify_nonce( $_POST['nonce_code'], 'myajax-nonce' ) ) die( 'Stop!');
 
 	$cat_id = intval( $_POST['cat_id'] );
 
 	global $post;
 
-	// 
+	// получаем карточки по категории
 	$tempposts = get_posts( array(
 		'category' => $cat_id,
 		'nopaging' => 1,
-		'order'=> 'DESC'
+		'order'=> 'DESC' // в обратном порядке, потому что при добавлении в карусель порядок изменится
 	) );
 
 	
-
+			// перебираем посты и сохраняем необходимые параметры
 		foreach( $tempposts as $post ){
 			setup_postdata( $post );
-			// стандартный вывод записей  
+			// получаем метки поста
 			$mytags = get_the_tags( $post->ID );
 			$tags = "";
 			foreach( $mytags as $mytag ){
 				$img_path = MY_THEM_IMG . '/svg/' . $mytag->slug . '.svg';
 					$tags .= '<div class="photo" ><img src="' . $img_path . '" alt=""></div>';
 			}
+			// данные поста храним в виде ассоциативного массива
 			$mypost = array(
 				"id" => $post->ID,
 				"thumbnail" => get_the_post_thumbnail_url(),
@@ -140,14 +143,14 @@ function get_category_callback(){
 				"tags" => $tags,
 				"img_path" => MY_THEM_IMG
 			);
-
+			// массив постов
 			$myposts[] = $mypost;
 		}
 
 	wp_reset_postdata(); // сбрасываем переменную $post
-	
+	 // серриализуем массив
 	$json_my_posts = json_encode ( $myposts ,  10 , 512 );
-	
+	//и отправляем результат
 	echo $json_my_posts;
     wp_die();
 
